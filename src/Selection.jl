@@ -65,10 +65,7 @@ function evaluate(selection::Selection, frame::Frame)
     return result
 end
 
-"""
-Make a deep copy of a `selection`.
-"""
-function Base.deepcopy(selection::Selection)
+function Base.deepcopy_internal(selection::Selection, ::IdDict)
     ptr = lib.chfl_selection_copy(__const_ptr(selection))
     return Selection(CxxPointer(ptr, is_const=false))
 end

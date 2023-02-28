@@ -138,10 +138,7 @@ function wrap!(cell::UnitCell, vector::Vector{Float64})
     return vector
 end
 
-"""
-Make a deep copy of a `cell`.
-"""
-function Base.deepcopy(cell::UnitCell)
+function Base.deepcopy_internal(cell::UnitCell, ::IdDict)
     ptr = lib.chfl_cell_copy(__const_ptr(cell))
     return UnitCell(CxxPointer(ptr, is_const=false))
 end

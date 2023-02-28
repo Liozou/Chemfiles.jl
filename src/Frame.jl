@@ -284,10 +284,7 @@ function add_residue!(frame::Frame, residue::Residue)
     return nothing
 end
 
-"""
-Make a deep copy of a `Frame`.
-"""
-function Base.deepcopy(frame::Frame)
+function Base.deepcopy_internal(frame::Frame, ::IdDict)
     ptr = lib.chfl_frame_copy(__const_ptr(frame))
     return Frame(CxxPointer(ptr, is_const=false))
 end

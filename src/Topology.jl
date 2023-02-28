@@ -265,10 +265,7 @@ function Base.resize!(topology::Topology, size::Integer)
     ))
 end
 
-"""
-Make a deep copy of a `topology`.
-"""
-function Base.deepcopy(topology::Topology)
+function Base.deepcopy_internal(topology::Topology, ::IdDict)
     ptr = lib.chfl_topology_copy(__const_ptr(topology))
     return Topology(CxxPointer(ptr, is_const=false))
 end

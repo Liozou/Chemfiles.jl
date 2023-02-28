@@ -146,10 +146,7 @@ function list_properties(residue::Residue)
     return map(unsafe_string, names)
 end
 
-"""
-Make a deep copy of a `residue`.
-"""
-function Base.deepcopy(residue::Residue)
+function Base.deepcopy_internal(residue::Residue, ::IdDict)
     ptr = lib.chfl_residue_copy(__const_ptr(residue))
     return Residue(CxxPointer(ptr, is_const=false))
 end

@@ -195,10 +195,7 @@ function list_properties(atom::Atom)
     return map(unsafe_string, names)
 end
 
-"""
-Make a deep copy of an `atom`.
-"""
-function Base.deepcopy(atom::Atom)
+function Base.deepcopy_internal(atom::Atom, ::IdDict)
     ptr = lib.chfl_atom_copy(__const_ptr(atom))
     return Atom(CxxPointer(ptr, is_const=false))
 end
